@@ -79,10 +79,7 @@ if(isset($_SESSION['uname']))
           <li><a href="#about">About</a></li>
           <li><a href="menu.php">Menu</a></li>
           <li><a href="order.php">Order Food</a></li>
-          <li><a href="#events">Events</a></li>
-          <li><a href="#chefs">Chefs</a></li>
-       
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="order_history.php">Order History</a></li>
           <li class="book-a-table text-center"><a href="login.php"><?php echo $xyz?></a></li>
           <?php 
           if(isset($_SESSION['uname']))
