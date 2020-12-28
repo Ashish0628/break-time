@@ -1,3 +1,22 @@
+<?php
+$xyz="Login/Register";
+session_start();
+if(isset($_SESSION['uname']))
+{   $xyz=($_SESSION['uname']);
+   // echo "Welcome " .   $_SESSION['uname'] . " Password:" . $_SESSION['password'];
+    if(isset($_GET['logout'])){
+        session_unset();
+        session_destroy();
+        echo "<script> location.href='index.php'; </script>";
+        $xyz="Login/Register";
+    }
+}
+require_once 'api/DbConnect.php';
+$db = new DbConnect();
+$con = $db->connect();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +45,6 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/main.css">
 
   <!-- =======================================================
   * Template Name: Delicious - v2.1.0
@@ -38,83 +56,103 @@
 
 <body>
 
+  <!-- ======= Top Bar ======= -->
+  <!-- <section id="topbar" class="d-none d-lg-flex align-items-center fixed-top topbar-transparent">
+    <div class="container text-right">
+      <i class="icofont-phone"></i> +1 5589 55488 55
+      <i class="icofont-clock-time icofont-rotate-180"></i> Mon-Sat: 11:00 AM - 23:00 PM
+    </div>
+  </section> -->
 
   <!-- ======= Header ======= -->
   <header style="background: black;" id="header" class="fixed-top d-flex align-items-center header-transparent">
     <div class="container d-flex align-items-center">
 
       <div class="logo mr-auto">
-        <h1 class="text-light"><a href="index.html"><span>Delicious</span></a></h1>
+        <h1 class="text-light"><a href="index.php"><span>Break-Time</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="index.html">Home</a></li>
+          <li ><a href="index.php">Home</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#menu">Menu</a></li>
-          <li><a href="#specials">Specials</a></li>
+          <li class="active"><a href="menu.php">Menu</a></li>
+          <li><a href="order.php">Order Food</a></li>
           <li><a href="#events">Events</a></li>
           <li><a href="#chefs">Chefs</a></li>
-          <li><a href="#gallery">Gallery</a></li>
           <li><a href="#contact">Contact</a></li>
-
-          <li class="book-a-table text-center"><a href="#book-a-table">Book a table</a></li>
+          <li class="book-a-table text-center"><a href="login.php"><?php echo $xyz?></a></li>
+          <?php 
+          if(isset($_SESSION['uname']))
+          {  
+             echo "<li class=\"book-a-table text-center\"><a href=\"index.php?logout=true\">Logout</a></li>"; 
+          }
+          
+          
+          ?>
         </ul>
-      </nav>
+      </nav><!-- .nav-menu -->
 
     </div>
   </header><!-- End Header -->
+<section id="menu" class="menu">
+      <div class="container">
 
-  <!-- ======= Hero Section ======= -->
-  <section id="register">
-    <div class="container">
-      <form name="reg-form" action="forms/contact.php" method="post" role="form" class="php-email-form">
-        <div class="form-row">
-            <input type="text" name="name" required class="form-control reg-form" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-            <div class="validate"></div>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control reg-form" name="username" placeholder="Username" required/>
-          <div class="validate"></div>
+        <div class="section-title">
+          <h2>Check our tasty <span>Menu</span></h2>
         </div>
 
-        <div class="form-group">
-          <input type="password" class="form-control reg-form" name="password" placeholder="Password" required/>
-          <div class="validate"></div>
+        <div class="row">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="menu-flters">
+
+              <li data-filter="*" class="filter-active">SHOW ALL</li>
+              <?php
+                $sql="select distinct type from menu";
+                $result= mysqli_query($con,$sql);
+                $result= mysqli_query($con,$sql);
+                while($row=mysqli_fetch_assoc($result)){
+                    $t=$row['type'];
+                    $st=strtoupper($t);
+                    echo "<li data-filter=\".filter-$t \">$st</li>";
+                }
+
+              ?>        
+            </ul>
+          </div>
         </div>
 
-        <div class="form-group">
-          <input type="number" class="form-control reg-form" name="mobile" placeholder="Mobile Number" required/>
-          <div class="validate"></div>
+        <div class="row menu-container">
+          <?php
+           
+            $sql="select * from menu";
+            $result= mysqli_query($con,$sql);
+            while($row=mysqli_fetch_assoc($result)){
+                menuItem($row['item_name'],$row['type'],$row['ingredients'],$row['price'],$row['item_no']);
+
+            }
+          function menuItem($name,$type,$ing,$price,$item_id){
+            echo "<div class=\"col-lg-6 menu-item filter-$type\">
+                <div class=\"menu-content\">
+                <p>$name</p><span>₹$price</span>
+                </div>
+                <div class=\"menu-ingredients\">
+                    $ing
+                </div>
+                
+                </div>";
+            }
+          ?>
+         
         </div>
+    </section>
 
-        <div class="form-group">
-
-          <input class="reg-form" type="radio" id="male" name="gender" value="male">
-          <label for="male">Male</label><br>
-          <input class="reg-form" type="radio" id="female" name="gender" value="female">
-          <label for="female">Female</label><br>
-          <input class="reg-form" type="radio" id="other" name="gender" value="other">
-          <label for="other">Other</label>
-
-
-          <div class="validate"></div>
-
-        </div>
-
-
-        <div class="text-center"><button class="btn btn-secondary" type="submit">Register</button></div>
-      </form>
-    </div>
-  </section><!-- End Hero -->
-
-
-  <!-- ======= Footer ======= -->
+     <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="container">
-      <h3>Delicious</h3>
+      <h3>Break-Time</h3>
       <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
       <div class="social-links">
         <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
@@ -124,7 +162,7 @@
         <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
       </div>
       <div class="copyright">
-        &copy; Copyright <strong><span>Delicious</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>BreakTime</span></strong>. All Rights Reserved
       </div>
 
     </div>
@@ -141,10 +179,10 @@
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/venobox/venobox.min.js"></script>
   <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-
+<script src="assets/js/plusminus.js"></script>
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
-  </body>
+</body>
 
-  </html>
+</html>
