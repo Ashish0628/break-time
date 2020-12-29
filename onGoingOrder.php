@@ -79,14 +79,14 @@ $con = $db->connect();
           <?php
             if($xyz=="admin"){
               echo "
-            <li><a href=\"onGoingOrder.php\">On Going Orders</a></li>
-            <li class=\"active\"><a href=\"order_history.php\">Order History</a></li>
-            <li><a href=\"addFoodItem.php\">Add Food Item</a></li>
+            <li class=\"active\"><a href=\"onGoingOrder.php\">On Going Orders</a></li>
+            <li ><a href=\"order_history.php\">Order History</a></li>
+            <li ><a href=\"addFoodItem.php\">Add Food Item</a></li>
           ";
             }
             else{
               echo " <li><a href=\"order.php\">Order Food</a></li>
-              <li class=\"active\"><a href=\"order_history.php\">Order History</a></li>
+              <li ><a href=\"order_history.php\">Order History</a></li>
              ";
             }
           ?>
@@ -103,14 +103,13 @@ $con = $db->connect();
       </nav><!-- .nav-menu -->
     </div>
   </header><!-- End Header -->
-
- 
+         
 
   <section style="margin-top:15px;" id="why-us\" class="why-us">
       <div class="container">
 
         <div class="section-title">
-          <h2 style="font-family: Yellowtail script=latin rev=2;">ORDER <span>HISTORY</span></h2>
+          <h2 style="font-family: Yellowtail script=latin rev=2;">CURRENT <span>ORDERS</span></h2>
            </div>
 
         <div class="row">
@@ -118,7 +117,7 @@ $con = $db->connect();
                 <?php
                 $uname=$_SESSION['uname'];
                 if($xyz=="admin"){
-                  $sql="SELECT * FROM `order_history`WHERE `status`='COMPLETED';";
+                  $sql="SELECT * FROM `order_history`WHERE `status`='PENDING' or `status`='BEING PREPARED' or `status`='READY' ;";
                 }
                 else{
                 $sql="SELECT * FROM `order_history` WHERE `username`='$uname';";
@@ -139,9 +138,28 @@ $con = $db->connect();
 
               }
             
-            
+              
               
               function template($order_id,$total_amt,$ing,$date,$status){
+                $x="";
+                $y="disabled";
+                $z="disabled";
+                if($status=="BEING PREPARED")
+                {  $x="disabled";
+                  $y="";
+                  $z="disabled";
+                }
+                else
+                if($status=="READY"){
+                  $x="disabled";
+                  $y="disabled";
+                  $z="";  
+                }
+                else
+                if($status=="COMPLETED")
+                  $z="disabled";    
+
+               
                 echo "
                 <div class=\"col-lg-4 mt-4 mt-lg-0\">
                     <div class=\"box\">
@@ -153,7 +171,19 @@ $con = $db->connect();
                       
                       <strong><p style=\"color:#000;\">ORDERED ON: $date</p></strong>
                       <span style=\"font-size:20px;\">Order Status </span>
-                      <span style=\"color:#540ADC; font-size:15px;\">$status</span>
+                      <span id=\"$order_id status\"style=\"color:#540ADC; font-size:15px;\">$status</span>
+                      <button type=\"button\" 
+                      $x 
+                      onclick=\"btnAcceptClicked($order_id,'BEING PREPARED','$order_id btnAccept')\" id=\"$order_id btnAccept\" class=\"btn btn-success btn-circle btn-lg\"><i class=\"glyphicon glyphicon-link\"></i></button>
+                      <button type=\"button\" 
+                      $y
+                     
+                      id=\"$order_id btnReady\" onclick=\"btnAcceptClicked($order_id,'READY','$order_id btnReady')\" 
+                      class=\"btn btn-info btn-circle btn-lg\"><i class=\"glyphicon glyphicon-ok\"></i></button>
+                      <button type=\"button\" 
+                      $z 
+                      onclick=\"btnAcceptClicked($order_id,'COMPLETED','$order_id btnComplete')\"
+                      id=\"$order_id btnComplete\" class=\"btn btn-danger btn-circle btn-lg\"><i class=\"glyphicon glyphicon-remove\"></i></button>
                     </div>
                 </div>
               ";
@@ -181,6 +211,32 @@ $con = $db->connect();
       }
       
       ?>    
+      <script>
+        function btnAcceptClicked(id,status,btnId){
+          var btn={};
+          btn.id=id;
+          btn.status=status;
+          $.ajax({
+              url:'api/accept.php',
+              type:'post',
+              data:btn,
+              success:function(res){
+                console.log(res);
+                document.getElementById(btnId).disabled = true;
+                if(btnId==(id+" btnAccept")){
+                  document.getElementById(id+" btnReady").disabled = false;
+                }
+                if(btnId==(id+" btnReady")){
+                  document.getElementById(id+" btnComplete").disabled = false;
+                }
+                document.getElementById(id+" status").innerHTML =status;
+
+              }
+
+            });
+        }
+        
+      </script>
       </div>
    
 </div>
@@ -192,7 +248,7 @@ $con = $db->connect();
       <script type="text/javascript">
           setTimeout(function(){
           location.reload();
-      },60000);
+      },10000);
       </script>
 
 

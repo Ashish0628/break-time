@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Dec 28, 2020 at 11:20 AM
+-- Generation Time: Dec 29, 2020 at 01:37 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -26,8 +26,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `menu`
 --
-create database break_time;
-use break_time;
+
 CREATE TABLE `menu` (
   `item_no` int(11) NOT NULL,
   `item_name` varchar(20) NOT NULL,
@@ -55,7 +54,9 @@ INSERT INTO `menu` (`item_no`, `item_name`, `price`, `ingredients`, `type`) VALU
 (12, 'Uttapam', 65, '', 'lunch'),
 (13, 'Masala Dosa', 55, '', 'lunch'),
 (14, 'Choc-Icecream', 40, '', 'desert'),
-(15, 'Noodles', 100, '', 'chinese');
+(15, 'Noodles', 100, '', 'chinese'),
+(16, 'Cheese Burst Pizza', 120, '', 'pizza'),
+(17, 'Mac Maharaja', 130, 'Cheese , Mint Mayo, Crispy Pattie ', 'burger');
 
 -- --------------------------------------------------------
 
@@ -67,21 +68,30 @@ CREATE TABLE `order_history` (
   `order_id` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
   `order_detail` varchar(1000) NOT NULL,
-  `date` datetime NOT NULL DEFAULT current_timestamp()
+  `date` datetime NOT NULL DEFAULT current_timestamp(),
+  `total_price` int(11) NOT NULL,
+  `status` varchar(30) NOT NULL DEFAULT 'PENDING'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `order_history`
 --
 
-INSERT INTO `order_history` (`order_id`, `username`, `order_detail`, `date`) VALUES
-(11, 'priyanshsolanki', '2 X Mango Shake ------------ ( 2 X 30 ) = 60<br/>2 X Samosa ------------ ( 2 X 20 ) = 40<br/>Total Price :100', '2020-12-28 11:55:19'),
-(12, 'priyanshsolanki', '2 X Mango Shake ------------ ( 2 X 30 ) = 60<br/>2 X Samosa ------------ ( 2 X 20 ) = 40<br/>1 X Masala Dosa ------------ ( 1 X 55 ) = 55<br/>Total Price :155', '2020-12-28 11:56:09'),
-(13, 'bhushanpande', '1 X Tea ------------ ( 1 X 15 ) = 15<br/>1 X Samosa ------------ ( 1 X 20 ) = 20<br/>1 X Vada-Pav ------------ ( 1 X 15 ) = 15<br/>1 X Uttapam ------------ ( 1 X 65 ) = 65<br/>Total Price :115', '2020-12-28 12:15:35'),
-(14, 'bhushanpande', '1 X Regular-Meal ------------ ( 1 X 120 ) = 120<br/>Total Price :120', '2020-12-28 12:17:13'),
-(15, 'bhushanpande', '2 X Masala Dosa ------------ ( 2 X 55 ) = 110<br/>Total Price :110', '2020-12-28 12:19:25'),
-(16, 'jayanthpabothu', '2 X Mango Shake ------------ ( 2 X 30 ) = 60<br/>1 X Hot Coffee ------------ ( 1 X 20 ) = 20<br/>1 X Choc-Icecream ------------ ( 1 X 40 ) = 40<br/>Total Price :120', '2020-12-28 15:37:40'),
-(17, 'naitikparmar', '1 X Masala Dosa ------------ ( 1 X 55 ) = 55<br/>1 X Choc-Icecream ------------ ( 1 X 40 ) = 40<br/>1 X Noodles ------------ ( 1 X 100 ) = 100<br/>Total Price :195', '2020-12-28 15:42:20');
+INSERT INTO `order_history` (`order_id`, `username`, `order_detail`, `date`, `total_price`, `status`) VALUES
+(18, 'priyanshsolanki', '2 X Regular-Meal ---- ( 2 X 120 ) = 240<br/>', '2020-12-28 16:56:44', 240, 'COMPLETED'),
+(19, 'jayanthpabothu', '1 X Regular-Meal   ( 1 X 120 ) = 120<br/>1 X Uttapam   ( 1 X 65 ) = 65<br/>1 X Choc-Icecream   ( 1 X 40 ) = 40<br/>', '2020-12-28 22:16:10', 225, 'COMPLETED'),
+(20, 'jayanthpabothu', '1 X Noodles   ( 1 X 100 ) = 100<br/>', '2020-12-28 22:17:44', 100, 'COMPLETED'),
+(21, 'jayanthpabothu', '1 X Mango Shake   ( 1 X 30 ) = 30<br/>', '2020-12-28 22:18:47', 30, 'READY'),
+(22, 'jayanthpabothu', '2 X Hot Coffee   ( 2 X 20 ) = 40<br/>', '2020-12-28 22:19:00', 40, 'READY'),
+(23, 'jayanthpabothu', '4 X Mango Shake   ( 4 X 30 ) = 120<br/>', '2020-12-28 22:21:08', 120, 'BEING PREPARED'),
+(24, 'priyanshsolanki', '2 X Mango Shake   ( 2 X 30 ) = 60<br/>1 X Choc-Icecream   ( 1 X 40 ) = 40<br/>', '2020-12-28 22:30:34', 100, 'READY'),
+(25, 'bhushanpande', '1 X Mango Shake   ( 1 X 30 ) = 30<br/>2 X Cheese Burst Pizza   ( 2 X 120 ) = 240<br/>', '2020-12-28 23:53:56', 270, 'READY'),
+(26, 'bhushanpande', '2 X Cold Coffee   ( 2 X 30 ) = 60<br/>', '2020-12-28 23:54:16', 60, 'BEING PREPARED'),
+(27, 'ashishsulakhe', '2 X Mango Shake   ( 2 X 30 ) = 60<br/>', '2020-12-29 12:05:17', 60, 'BEING PREPARED'),
+(28, 'ashishsulakhe', '1 X Idli   ( 1 X 30 ) = 30<br/>1 X Cold Coffee   ( 1 X 30 ) = 30<br/>', '2020-12-29 12:51:04', 60, 'READY'),
+(29, 'jayanthpabothu', '3 X Uttapam   ( 3 X 65 ) = 195<br/>', '2020-12-29 13:46:32', 195, 'COMPLETED'),
+(30, 'sohampalnitkar', '1 X Cheese Burst Pizza   ( 1 X 120 ) = 120<br/>1 X Mac Maharaja   ( 1 X 130 ) = 130<br/>', '2020-12-29 14:17:08', 250, 'COMPLETED'),
+(31, 'sohampalnitkar', '2 X Cold Coffee   ( 2 X 30 ) = 60<br/>', '2020-12-29 14:21:02', 60, 'PENDING');
 
 -- --------------------------------------------------------
 
@@ -101,13 +111,14 @@ CREATE TABLE `user_data` (
 --
 
 INSERT INTO `user_data` (`name`, `username`, `password`, `mobile`) VALUES
-('AbcKuchBhi', 'abcdef', '12345678', '9763699121'),
+('admin', 'admin', '12345678', '9876543210'),
 ('Ashish Sulakhe', 'ashishsulakhe', '12345678', '8888888888'),
 ('Bhushan Pande', 'bhushanpande', '12345678', '9876543210'),
 ('Jayanth Pabothu', 'jayanthpabothu', '12345678', '9876543210'),
 ('Naitik Parmar', 'naitikparmar', '12345678', '9876543211'),
 ('Priyansh Sunilkumar ', 'priyanshsolanki', '12345678', '9763699247'),
-('Sejal Shroff', 'sejalshroff', '12345678', '9876543210');
+('Sejal Shroff', 'sejalshroff', '12345678', '9876543210'),
+('Soham Palnitkar', 'sohampalnitkar', '12345678', '9876543210');
 
 --
 -- Indexes for dumped tables
@@ -139,13 +150,13 @@ ALTER TABLE `user_data`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `item_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `item_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `order_history`
 --
 ALTER TABLE `order_history`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

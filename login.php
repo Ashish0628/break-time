@@ -32,8 +32,9 @@ else{
 			 $_SESSION['uname']= $uname;
 			 $_SESSION['password']= $pass;
 		echo "<script type='text/javascript'>alert('Login Credentials verified')</script>";
-		echo "<script> location.href='index.php'</script>";
-		
+  
+      echo "<script> location.href='index.php'</script>";
+  
 		}else{
 		echo "<script type='text/javascript'>alert('Invalid Login Credentials')</script>";
 		//echo "Invalid Login Credentials";

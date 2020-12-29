@@ -79,8 +79,20 @@ $con = $db->connect();
         <li ><a href="index.php">Home</a></li>
           <li><a href="#about">About</a></li>
           <li class="active"><a href="menu.php">Menu</a></li>
-          <li ><a href="order.php">Order Food</a></li>
-          <li ><a href="order_history.php">Order History</a></li>
+          <?php
+            if($xyz=="admin"){
+              echo "
+            <li><a href=\"onGoingOrder.php\">On Going Orders</a></li>
+            <li><a href=\"order_history.php\">Order History</a></li>
+            <li><a href=\"addFoodItem.php\">Add Food Item</a></li>
+          ";
+            }
+            else{
+              echo " <li><a href=\"order.php\">Order Food</a></li>
+              <li><a href=\"order_history.php\">Order History</a></li>
+             ";
+            }
+          ?>
           <li class="book-a-table text-center"><a href="login.php"><?php echo $xyz?></a></li>
           <?php 
           if(isset($_SESSION['uname']))
