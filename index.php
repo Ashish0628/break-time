@@ -81,16 +81,16 @@ if(isset($_SESSION['uname']))
           <li><a href="order.php">Order Food</a></li>
           <li><a href="#events">Events</a></li>
           <li><a href="#chefs">Chefs</a></li>
-       
+
           <li><a href="#contact">Contact</a></li>
           <li class="book-a-table text-center"><a href="login.php"><?php echo $xyz?></a></li>
-          <?php 
+          <?php
           if(isset($_SESSION['uname']))
-          {  
-             echo "<li class=\"book-a-table text-center\"><a href=\"index.php?logout=true\">Logout</a></li>"; 
+          {
+             echo "<li class=\"book-a-table text-center\"><a href=\"index.php?logout=true\">Logout</a></li>";
           }
-          
-          
+
+
           ?>
         </ul>
       </nav><!-- .nav-menu -->
@@ -112,7 +112,8 @@ if(isset($_SESSION['uname']))
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown"><span>Break</span> Time</h2>
-                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                <p class="animate__animated animate__fadeInUp">Break-Time canteen is a popular  destination for locals and College students alike. A place where college students can hangout together in their  <i style="font-family:Satisfy, sans-serif;font-size:28px"> Break-Time </i>  by pre-ordering the food during Work hours and enjoy mouthwatering dishes
+prepared by expert chefs.</p>
                 <div>
                   <a href="menu.php" class="btn-menu animate__animated animate__fadeInUp scrollto">Our Menu</a>
                   <a href="#book-a-table" class="btn-book animate__animated animate__fadeInUp scrollto">Book a Table</a>
@@ -125,8 +126,9 @@ if(isset($_SESSION['uname']))
           <div class="carousel-item" style="background: url(assets/img/slide/slide-2.jpg);">
             <div class="carousel-container">
               <div class="carousel-content">
-                <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
-                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                <h2 class="animate__animated animate__fadeInDown">Welcoming ambience</h2>
+                <p class="animate__animated animate__fadeInUp">Treat loved ones or colleagues to an unforgettable meal at Break-Time, our sophisticated revolving restaurant. Located at the centre of the
+ the city near MIT college, our restaurant invites you to bask in panoramic views of downtown..</p>
                 <div>
                   <a href="menu.php" class="btn-menu animate__animated animate__fadeInUp scrollto">Our Menu</a>
                   <a href="#book-a-table" class="btn-book animate__animated animate__fadeInUp scrollto">Book a Table</a>
@@ -140,8 +142,9 @@ if(isset($_SESSION['uname']))
             <div class="carousel-background"><img src="assets/img/slide/slide-3.jpg" alt=""></div>
             <div class="carousel-container">
               <div class="carousel-content">
-                <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
-                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                <h2 class="animate__animated animate__fadeInDown">Fresh Food</h2>
+                <p class="animate__animated animate__fadeInUp">Sit back in a contemporary armchair or a plush banquette and savor fresh seafood and produce from local
+fishermen and farmers.</p>
                 <div>
                   <a href="menu.php" class="btn-menu animate__animated animate__fadeInUp scrollto">Our Menu</a>
                   <a href="#book-a-table" class="btn-book animate__animated animate__fadeInUp scrollto">Book a Table</a>
@@ -264,19 +267,19 @@ if(isset($_SESSION['uname']))
           <div class="col-lg-3">
             <ul class="nav nav-tabs flex-column">
               <li class="nav-item">
-                <a class="nav-link active show" data-toggle="tab" href="#tab-1">Modi sit est</a>
+                <a class="nav-link active show" data-toggle="tab" href="#tab-1">Pav-Bhaji</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tab-2">Unde praesentium sed</a>
+                <a class="nav-link" data-toggle="tab" href="#tab-2">Chicken Kathi Roll Recipe</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tab-3">Pariatur explicabo vel</a>
+                <a class="nav-link" data-toggle="tab" href="#tab-3">Bombay Grilled Sandwich</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tab-4">Nostrum qui quasi</a>
+                <a class="nav-link" data-toggle="tab" href="#tab-4">Hyderabadi Chicken Biryani</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tab-5">Iusto ut expedita aut</a>
+                <a class="nav-link" data-toggle="tab" href="#tab-5">Sizzling Hot Chocolate Brownie</a>
               </li>
             </ul>
           </div>
@@ -285,60 +288,62 @@ if(isset($_SESSION['uname']))
               <div class="tab-pane active show" id="tab-1">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Architecto ut aperiam autem id</h3>
-                    <p class="font-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
-                    <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero</p>
+                    <h3>Pav-bhaji</h3>
+                    <p class="font-italic">Pav bhaji is a fast food dish from India. It consists of a thick vegetable curry served with a soft bread roll.
+Vegetables in the curry may include potatoes, onions, carrots, chillies, peas, bell peppers, and tomatoes. Its
+origins are in the state of Maharashtra</p>
+                    <p>Pav-Bhaji is famous fast food common through out Maharashtra where everyone prefers it as a evening time snack or breakfast and This is one of our specials which attracts many customers to our canteen </p>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="assets/img/specials-1.jpg" alt="" class="img-fluid">
+                    <img src="assets/img/specials1.jfif" alt="" class="img-fluid">
                   </div>
                 </div>
               </div>
               <div class="tab-pane" id="tab-2">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Et blanditiis nemo veritatis excepturi</h3>
-                    <p class="font-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
-                    <p>Ea ipsum voluptatem consequatur quis est. Illum error ullam omnis quia et reiciendis sunt sunt est. Non aliquid repellendus itaque accusamus eius et velit ipsa voluptates. Optio nesciunt eaque beatae accusamus lerode pakto madirna desera vafle de nideran pal</p>
+                    <h3>Chicken Kathi Roll Recipe</h3>
+                    <p class="font-italic">Chicken Kathi Roll Recipe is a lip smacking roll of a flaky tawa paratha stuffed with a flavourful chicken filling. Once your parathas are ready this dish can be put together real quick. Serve it as a high tea or as an evening snack or even as dinner.</p>
+                    <p>This yummilicious chicken filling is held in a crispy tawa paratha lined with a thin simple omelette, along with some pickled onions and generous sprinkle of chaat masala. </p>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="assets/img/specials-2.jpg" alt="" class="img-fluid">
+                    <img src="assets/img/specials 2.png" style="height:225px; width:400px;" alt="" class="img-fluid">
                   </div>
                 </div>
               </div>
               <div class="tab-pane" id="tab-3">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Impedit facilis occaecati odio neque aperiam sit</h3>
-                    <p class="font-italic">Eos voluptatibus quo. Odio similique illum id quidem non enim fuga. Qui natus non sunt dicta dolor et. In asperiores velit quaerat perferendis aut</p>
-                    <p>Iure officiis odit rerum. Harum sequi eum illum corrupti culpa veritatis quisquam. Neque necessitatibus illo rerum eum ut. Commodi ipsam minima molestiae sed laboriosam a iste odio. Earum odit nesciunt fugiat sit ullam. Soluta et harum voluptatem optio quae</p>
+                    <h3>Bombay Grilled Sandwich</h3>
+                    <p class="font-italic">Bombay Grilled Sandwich is a Delicious & popular sandwich made with green chutney and lots of veggies.These sandwiches are not only common on streets of Mumbai,but can also be found in most Indian restaurants,chaat centres. </p>
+                    <p>  </p>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="assets/img/specials-3.jpg" alt="" class="img-fluid">
+                    <img src="assets/img/specials 3.jpg" style="height:300px; width:500px;" alt="" class="img-fluid">
                   </div>
                 </div>
               </div>
               <div class="tab-pane" id="tab-4">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Fuga dolores inventore laboriosam ut est accusamus laboriosam dolore</h3>
-                    <p class="font-italic">Totam aperiam accusamus. Repellat consequuntur iure voluptas iure porro quis delectus</p>
-                    <p>Eaque consequuntur consequuntur libero expedita in voluptas. Nostrum ipsam necessitatibus aliquam fugiat debitis quis velit. Eum ex maxime error in consequatur corporis atque. Eligendi asperiores sed qui veritatis aperiam quia a laborum inventore</p>
+                    <h3>Hyderabadi Chicken Biryani</h3>
+                    <p class="font-italic">Hyderabadi Chicken Biryani is a non-vegetarian rice dish made with moderate spices and tender chicken pieces.</p>
+                    <p>This Indian chicken biryani is slow cooked to perfection and served as a main course. It is a delectable rice delight that is famous globally for its perfect balance of flavored spices mixed with chicken.</p>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="assets/img/specials-4.jpg" alt="" class="img-fluid">
+                    <img src="assets/img/specials 4.jpg"  style="height:180px; width:300px;" alt="" class="img-fluid">
                   </div>
                 </div>
               </div>
               <div class="tab-pane" id="tab-5">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Est eveniet ipsam sindera pad rone matrelat sando reda</h3>
-                    <p class="font-italic">Omnis blanditiis saepe eos autem qui sunt debitis porro quia.</p>
-                    <p>Exercitationem nostrum omnis. Ut reiciendis repudiandae minus. Omnis recusandae ut non quam ut quod eius qui. Ipsum quia odit vero atque qui quibusdam amet. Occaecati sed est sint aut vitae molestiae voluptate vel</p>
+                    <h3>Sizzling Hot Chocolate Brownie</h3>
+                    <p class="font-italic">Sizzling hot chocolate brownie served with vanilla ice cream and topped with walnuts, choco chips and hot choco sauce.It is the ultimate sensation of the ice cream and brownie.</p>
+                    <p>Among many other desserts our restaurant holds top position in this dessert. </p>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="assets/img/specials-5.jpg" alt="" class="img-fluid">
+                    <img src="assets/img/specials 5.jpg"  style="height:180px; width:300px;" alt="" class="img-fluid">
                   </div>
                 </div>
               </div>
@@ -756,7 +761,7 @@ if(isset($_SESSION['uname']))
             <div class="col-lg-3 col-md-6 info">
               <i class="icofont-google-map"></i>
               <h4>Location:</h4>
-              <p>A108 Adam Street<br>New York, NY 535022</p>
+              <p>Kothrud,Paud Road,Near MIT college <br>Pune, 411038</p>
             </div>
 
             <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
@@ -768,7 +773,7 @@ if(isset($_SESSION['uname']))
             <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
               <i class="icofont-envelope"></i>
               <h4>Email:</h4>
-              <p>info@example.com<br>contact@example.com</p>
+              <p>priyanshsolanki@gmail.com<br></p>
             </div>
 
             <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
@@ -814,8 +819,8 @@ if(isset($_SESSION['uname']))
   <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="container">
-      <h3>Delicious</h3>
-      <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
+      <h3>Break-Time</h3>
+      <p>Discover the best food & drinks in Pune.</p>
       <div class="social-links">
         <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
         <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
