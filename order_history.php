@@ -1,3 +1,25 @@
+<?php
+$xyz="Login/Register";
+session_start();
+if(isset($_SESSION['uname']))
+{   $xyz=($_SESSION['uname']);
+   // echo "Welcome " .   $_SESSION['uname'] . " Password:" . $_SESSION['password'];
+    if(isset($_GET['logout'])){
+        session_unset();
+        session_destroy();
+        echo "<script> location.href='index.php'; </script>";
+        $xyz="Login/Register";
+    }
+}
+else{
+
+	echo "<script> location.href='login.php'</script>";
+
+}
+require_once 'api/DbConnect.php';
+$db = new DbConnect();
+$con = $db->connect();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,30 +60,35 @@
 <body>
 
     <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+    
+
+  <!-- ======= Header ======= -->
+  <header style="background: black;" id="header" class="fixed-top d-flex align-items-center header-transparent">
     <div class="container d-flex align-items-center">
 
       <div class="logo mr-auto">
-        <h1 class="text-light"><a href="index.html"><span>Delicious</span></a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        <h1 class="text-light"><a href="index.php"><span>Break-Time</span></a></h1>
+
       </div>
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="index.html">Home</a></li>
+          <li ><a href="index.php">Home</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#menu">Menu</a></li>
-          <li><a href="#specials">Specials</a></li>
-          <li><a href="#events">Events</a></li>
-          <li><a href="#chefs">Chefs</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#contact">Contact</a></li>
-
-          <li class="book-a-table text-center"><a href="#book-a-table">Book a table</a></li>
+          <li><a href="menu.php">Menu</a></li>
+          <li ><a href="order.php">Order Food</a></li>
+          <li class="active"><a href="order_history.php">Order History</a></li>
+          <li class="book-a-table text-center"><a href="login.php"><?php echo $xyz?></a></li>
+          <?php 
+          if(isset($_SESSION['uname']))
+          {  
+             echo "<li class=\"book-a-table text-center\"><a href=\"index.php?logout=true\">Logout</a></li>"; 
+          }
+          
+          
+          ?>
         </ul>
       </nav><!-- .nav-menu -->
-
     </div>
   </header><!-- End Header -->
 
@@ -75,100 +102,61 @@
 
   <br>
 
-  <div id = "boxes"> 
+  <div id = "boxes" style="margin-bottom:30px; height:auto;"> 
      
+      <?php
+      $uname=$_SESSION['uname'];
+      $sql="SELECT * FROM `order_history` WHERE `username`='$uname';";
+      $result= mysqli_query($con,$sql);
+      $count = mysqli_num_rows($result);
+      if($count==0){
+        echo "<div style=\"text-align: center;\">
+        <h5 style=\"font-family: Verdana, Geneva, Tahoma, sans-serif;\">Please Try Our Tasty Food</h5>
       
-    <div id = "leftbox"> 
-
+        <br>
        
-            
-        <h2>Restaurant Name</h2> 
-        <span>Address</span>
-        <hr> 
-        <div>
-            <h5 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">ORDER NUMBER</h5>
-            <span style="font-size: large;">12345678</span>
-            <br>
-            <h5 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">TOTAL AMOUNT</h5>
-            <span style="font-size: large;">Rs 500</span>
-            <br>
-            <h5 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">ITEMS</h5>
-            <span style="font-size: large;">1 X ABC</span>
-            <span style="font-size: large;">2 X DEF</span>
-            <br>
-            <h5 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">ORDERED ON</h5>
-            <span style="font-size: large;">22/12/20</span>
-            <br>
 
-        </div>
-    </div>  
+    </div>
+    
+</div> ";
+      }
+      while($row=mysqli_fetch_assoc($result)){
+          template($row['order_id'],$row['total_price'],$row['order_detail'],$row['date']);
+
+      }
       
-    <div id = "middlebox"> 
+      function template($order_id,$total_amt,$ing,$date){
+        echo "  <div id = \"leftbox\"> 
         
-        <h2>Restaurant Name</h2> 
-        <span>Address</span>
-        <hr> 
-        <div>
-            <h5 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">ORDER NUMBER</h5>
-            <span style="font-size: large;">12345678</span>
+       <div>
+            <h5 style=\"font-family: Verdana, Geneva, Tahoma, sans-serif;\">ORDER NUMBER</h5>
+            <span style=\"font-size: large;\">$order_id</span>
             <br>
-            <h5 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">TOTAL AMOUNT</h5>
-            <span style="font-size: large;">Rs 500</span>
+            <h5 style=\"font-family: Verdana, Geneva, Tahoma, sans-serif;\">TOTAL AMOUNT</h5>
+            <span style=\"font-size: large;\">Rs $total_amt</span>
             <br>
-            <h5 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">ITEMS</h5>
-            <span style="font-size: large;">1 X ABC</span>
-            <span style="font-size: large;">2 X DEF</span>
+            <h5 style=\"font-family: Verdana, Geneva, Tahoma, sans-serif;\">ITEMS</h5>
+            <span style=\font-size: large;\">$ing</span>
             <br>
-            <h5 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">ORDERED ON</h5>
-            <span style="font-size: large;">22/12/20</span>
+            <h5 style=\"font-family: Verdana, Geneva, Tahoma, sans-serif;\">ORDERED ON</h5>
+            <span style=\"font-size: large;\">$date</span>
             <br>
 
         </div>
-    </div> 
+        
+    </div> ";
+      }
       
-    <div id = "rightbox"> 
-        <h2>Restaurant Name</h2> 
-        <span>Address</span>
-        <hr> 
-        <div>
-            <h5 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">ORDER NUMBER</h5>
-            <span style="font-size: large;">12345678</span>
-            <br>
-            <h5 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">TOTAL AMOUNT</h5>
-            <span style="font-size: large;">Rs 500</span>
-            <br>
-            <h5 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">ITEMS</h5>
-            <span style="font-size: large;">1 X ABC</span>
-            <span style="font-size: large;">2 X DEF</span>
-            <br>
-            <h5 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">ORDERED ON</h5>
-            <span style="font-size: large;">22/12/20</span>
-            <br>
+      ?>    
+      
+   
+</div>
 
-        </div>
-</div> 
 <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 <br>
                   
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="container">
-      <h3>Delicious</h3>
-      <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
-      <div class="social-links">
-        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-      </div>
-      <div class="copyright">
-        &copy; Copyright <strong><span>Delicious</span></strong>. All Rights Reserved
-      </div>
 
-    </div>
-  </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 

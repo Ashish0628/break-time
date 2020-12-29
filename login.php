@@ -87,17 +87,14 @@ else{
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
-
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="index.php">Home</a></li>
+          <li ><a href="index.php">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="menu.php">Menu</a></li>
-          <li><a href="#specials">Specials</a></li>
-          <li><a href="#events">Events</a></li>
-          <li><a href="#chefs">Chefs</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="order.php">Order Food</a></li>
+          <li><a href="order_history.php">Order History</a></li>
+         
 
           <li class="book-a-table text-center"><a href="login.php">Login/Register</a></li>
         </ul>
@@ -111,34 +108,24 @@ else{
 <div class="body"></div>
 		<div class="grad"></div>
 		<div class="header">
-			<div><b>Break</b><span><b>Time</b></span></div>
+    <div class="carousel-content">
+    <h2 class="animate__animated animate__fadeInDown"style="font-size: 45px;"><strong><span>Break</span> </strong>Time</h2>
+    </div>
 		</div>
 		<br>
 		<div class="login">
 			<form action="" method="POST">
-				<input type="text" placeholder="Username" name="user" required><br>
+				<input type="text" placeholder="Username" name="user" required> <br>
 				<input type="password" placeholder="Password" name="password" required><br>
 				<input type="submit" value="Login" name="login">
 				<p></p>
-				<h3 class="text-light"><a href="register.php"><span>New User Register here !</span></a></h3>
+       
+				<h3 class="text-light"><a href="register.php"><span style="color: #000;font-size: 25px;font-family: 'Exo', sans-serif;">New User Register here !</span></a></h3>
 			</form>
 
 		</div>
-	<footer id="footer">
-    <div class="container">
-	<div class="social-links">
-        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-      </div>
-      <div class="copyright">
-        &copy; Copyright <strong><span>BreakTime</span></strong>. All Rights Reserved
-      </div>
 
-    </div>
-  </footer><!-- End Footer -->
+
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
@@ -154,9 +141,8 @@ else{
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
- 
-        
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  </body>
 
-  </html>
+</body>
+
+</html>
+

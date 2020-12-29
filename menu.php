@@ -76,13 +76,11 @@ $con = $db->connect();
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li ><a href="index.php">Home</a></li>
+        <li ><a href="index.php">Home</a></li>
           <li><a href="#about">About</a></li>
           <li class="active"><a href="menu.php">Menu</a></li>
-          <li><a href="order.php">Order Food</a></li>
-          <li><a href="#events">Events</a></li>
-          <li><a href="#chefs">Chefs</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li ><a href="order.php">Order Food</a></li>
+          <li ><a href="order_history.php">Order History</a></li>
           <li class="book-a-table text-center"><a href="login.php"><?php echo $xyz?></a></li>
           <?php 
           if(isset($_SESSION['uname']))

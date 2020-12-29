@@ -73,14 +73,11 @@ $con = $db->connect();
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li ><a href="index.php">Home</a></li>
+        <li ><a href="index.php">Home</a></li>
           <li><a href="#about">About</a></li>
-          <li ><a href="menu.php">Menu</a></li>
+          <li><a href="menu.php">Menu</a></li>
           <li class="active"><a href="order.php">Order Food</a></li>
-          <li><a href="#events">Events</a></li>
-          <li><a href="#chefs">Chefs</a></li>
-       
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="order_history.php">Order History</a></li>
           <li class="book-a-table text-center"><a href="login.php"><?php echo $xyz?></a></li>
           <?php 
           if(isset($_SESSION['uname']))
@@ -147,15 +144,23 @@ $con = $db->connect();
                 <div class=\"menu-ingredients\">
                     $ing
                 </div>
-                <div class=\"input-group\">
+                <div style=\"
+                width: 150px;
+                float: right;
+                margin-right:10px;
+            \"class=\"input-group\">
                 <span class=\"input-group-btn\">
-                    <button type=\"button\" class=\"btn btn-danger btn-number\"  data-type=\"minus\" data-field=\"$item_id\">
+                    <button type=\"button\" class=\"btn btn-danger btn-number\" style=\"height: 38px;
+                    width: 40px;
+                    text-align: center;\" data-type=\"minus\" data-field=\"$item_id\">
                       <span class=\"glyphicon glyphicon-minus\"></span>
                     </button>
                 </span>
                 <input type=\"text\" name=\"$item_id\"  class=\"form-control input-number\" value=\"0\" min=\"0\" max=\"100\">
                 <span class=\"input-group-btn\">
-                    <button type=\"button\" class=\"btn btn-success btn-number\" data-type=\"plus\" data-field=\"$item_id\">
+                    <button style=\"height: 38px;
+                    width: 40px;
+                    text-align: center;\" type=\"button\" class=\"btn btn-success btn-number\" data-type=\"plus\" data-field=\"$item_id\">
                         <span class=\"glyphicon glyphicon-plus\"></span>
                     </button>
                 </span>
@@ -166,7 +171,7 @@ $con = $db->connect();
          
         </div>
         <script>
-        var final;
+        var final,price;
             function get(){
                 var final_order="";
                 var tot = document.getElementById("tot").innerHTML;
@@ -177,14 +182,15 @@ $con = $db->connect();
                     if(x>0){
                         var item_name = document.getElementById(i+" name").innerHTML;  
                         var item_price = document.getElementById(i+" price").innerHTML;  
-                        final_order=final_order+""+x+" X "+item_name+" ------------ ( "+x+" X "+item_price+" ) = "+item_price*x+"<br/>";
+                        final_order=final_order+""+x+" X "+item_name+"   ( "+x+" X "+item_price+" ) = "+item_price*x+"<br/>";
                         total_price=total_price+(item_price*x);
                     }
                      
                 }
-                final_order=final_order+"Total Price :"+total_price;
-                final=final_order;   
+                final=final_order; 
+                price=total_price;  
                 document.getElementById("cart").innerHTML =final_order;
+                document.getElementById("total_cart").innerHTML =total_price;
                 if(total_price==0){
                   document.getElementById("orderBtn").disabled = true;
                 }
@@ -196,6 +202,7 @@ $con = $db->connect();
             function orderClick(){
                           var orderDetail={};
                           orderDetail.detail=final;
+                          orderDetail.totalPrice=price;
                           console.log(orderDetail);
                           $.ajax({
                           url:'api/orderDetail.php',
@@ -203,7 +210,7 @@ $con = $db->connect();
                           data:orderDetail,
                           success:function(res){
                             alert("Order has been placed successfully!");
-                            location.href='index.php';
+                            location.href='order_history.php';
                           }
 
                         });
@@ -220,19 +227,24 @@ $con = $db->connect();
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Please Confirm Your Order</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size:30px;">Please Confirm Your Order</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div id="cart" class="modal-body">
                 </div>
+                <div  class="modal-body">
+                  <strong>-:Total Amount:-</strong>
+                </div>
+                <div id="total_cart" class="modal-body">
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Modify Order</button>
                     <button style="color: #fff;
                               background: #ffb03b; "
                       type="button" id="orderBtn" onclick="orderClick()"class="btn btn-primary">Place Order</button>
-              
+
                 </div>
                 </div>
             </div>
@@ -261,7 +273,7 @@ $con = $db->connect();
         <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
       </div>
       <div class="copyright">
-        &copy; Copyright <strong><span>Delicious</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>Break Time</span></strong>. All Rights Reserved
       </div>
 
     </div>

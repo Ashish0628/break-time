@@ -6,7 +6,7 @@
     extract($_POST);
     $uname=$_SESSION['uname'];
 
-    $stmt = $con->prepare("INSERT INTO `order_history` (`username`, `order_detail`) VALUES ('$uname', '$detail');");
+    $stmt = $con->prepare("INSERT INTO `order_history` (`username`, `order_detail`,`total_price`) VALUES ('$uname', '$detail','$totalPrice');");
 	if($stmt->execute()){
      return 1;
 	    }else{
