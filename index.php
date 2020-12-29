@@ -78,10 +78,6 @@ if(isset($_SESSION['uname']))
           <li class="active"><a href="index.php">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="menu.php">Menu</a></li>
-          <li><a href="order.php">Order Food</a></li>
-          <li><a href="#events">Events</a></li>
-          <li><a href="#chefs">Chefs</a></li>
-
           <li><a href="#contact">Contact</a></li>
 
           <?php
