@@ -118,10 +118,10 @@ $con = $db->connect();
                 <?php
                 $uname=$_SESSION['uname'];
                 if($xyz=="admin"){
-                  $sql="SELECT * FROM `order_history`WHERE `status`='COMPLETED';";
+                  $sql="SELECT * FROM `order_history`WHERE `status`='COMPLETED' ORDER BY `order_id` DESC; ";
                 }
                 else{
-                $sql="SELECT * FROM `order_history` WHERE `username`='$uname';";
+                $sql="SELECT * FROM `order_history` WHERE `username`='$uname' ORDER BY `order_id` DESC;";
                 }
                 $result= mysqli_query($con,$sql);
                 $count = mysqli_num_rows($result);
