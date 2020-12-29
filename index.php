@@ -83,6 +83,22 @@ if(isset($_SESSION['uname']))
           <li><a href="#chefs">Chefs</a></li>
 
           <li><a href="#contact">Contact</a></li>
+
+          <?php
+            if($xyz=="admin"){
+              echo "
+            <li><a href=\"onGoingOrder.php\">On Going Orders</a></li>
+            <li><a href=\"order_history.php\">Order History</a></li>
+            <li><a href=\"addFoodItem.php\">Add Food Item</a></li>
+          ";
+            }
+            else{
+              echo " <li><a href=\"order.php\">Order Food</a></li>
+              <li><a href=\"order_history.php\">Order History</a></li>
+             ";
+            }
+          ?>
+
           <li class="book-a-table text-center"><a href="login.php"><?php echo $xyz?></a></li>
           <?php
           if(isset($_SESSION['uname']))
@@ -116,7 +132,7 @@ if(isset($_SESSION['uname']))
 prepared by expert chefs.</p>
                 <div>
                   <a href="menu.php" class="btn-menu animate__animated animate__fadeInUp scrollto">Our Menu</a>
-                  <a href="#book-a-table" class="btn-book animate__animated animate__fadeInUp scrollto">Book a Table</a>
+                  <a href="order.php" class="btn-book animate__animated animate__fadeInUp scrollto">Order Food</a>
                 </div>
               </div>
             </div>
@@ -131,7 +147,7 @@ prepared by expert chefs.</p>
  the city near MIT college, our restaurant invites you to bask in panoramic views of downtown..</p>
                 <div>
                   <a href="menu.php" class="btn-menu animate__animated animate__fadeInUp scrollto">Our Menu</a>
-                  <a href="#book-a-table" class="btn-book animate__animated animate__fadeInUp scrollto">Book a Table</a>
+                  <a href="order.php" class="btn-book animate__animated animate__fadeInUp scrollto">Order Food</a>
                 </div>
               </div>
             </div>
@@ -147,7 +163,7 @@ prepared by expert chefs.</p>
 fishermen and farmers.</p>
                 <div>
                   <a href="menu.php" class="btn-menu animate__animated animate__fadeInUp scrollto">Our Menu</a>
-                  <a href="#book-a-table" class="btn-book animate__animated animate__fadeInUp scrollto">Book a Table</a>
+                  <a href="order.php" class="btn-book animate__animated animate__fadeInUp scrollto">Order Food</a>
                 </div>
               </div>
             </div>
@@ -750,9 +766,8 @@ origins are in the state of Maharashtra</p>
         </div>
       </div>
 
-      <div class="map">
-        <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
-      </div>
+      <div class="map" style="text-align:center;">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15133.87981232345!2d73.81107642841162!3d18.507653373495973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bfb9e53a05f9%3A0x2be5e8da02be693e!2sMIT%20World%20Peace%20University!5e0!3m2!1sen!2sus!4v1609232390198!5m2!1sen!2sus"  width="800" height="400" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe> </div>
 
       <div class="container mt-5">
 

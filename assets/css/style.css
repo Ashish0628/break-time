@@ -819,7 +819,7 @@ section {
   display: block;
   font-size: 28px;
   font-weight: 700;
-  color: #ffcf88;
+  color: #1E130B;
 }
 
 .why-us .box h4 {
@@ -1636,8 +1636,8 @@ section {
 #leftbox { 
   float:left;  
   background:rgb(255, 255, 255); 
-  width:30%; 
-  height:auto; 
+  width:20%; 
+  height:340px; 
   padding: 5px;
   margin: 1.66%;
   text-align: left;
@@ -1646,29 +1646,3 @@ section {
   border-style: solid;
   border-width: 2px;
 } 
-#middlebox{ 
-  float:left;  
-  background:rgb(255, 255, 255); 
-  width:30%; 
-  height:auto;
-  padding: 5px;
-  margin: 1.66%; 
-  text-align: left;
-  border-radius: 15px;
-  border-color: #4b4a49;
-  border-style: solid;
-  border-width: 2px;
-} 
-#rightbox{ 
-  float:right; 
-  background:rgb(255, 255, 255);
-  width:30%; 
-  height:auto;
-  padding: 5px; 
-  margin: 1.66%;
-  text-align: left;
-  border-radius: 15px;
-  border-color: #4b4a49;
-  border-style: solid;
-  border-width: 2px;
-}

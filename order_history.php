@@ -11,12 +11,15 @@ if(isset($_SESSION['uname']))
         $xyz="Login/Register";
     }
 }
+else{
+
+	echo "<script> location.href='login.php'</script>";
+
+}
 require_once 'api/DbConnect.php';
 $db = new DbConnect();
 $con = $db->connect();
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,13 +59,8 @@ $con = $db->connect();
 
 <body>
 
-  <!-- ======= Top Bar ======= -->
-  <!-- <section id="topbar" class="d-none d-lg-flex align-items-center fixed-top topbar-transparent">
-    <div class="container text-right">
-      <i class="icofont-phone"></i> +1 5589 55488 55
-      <i class="icofont-clock-time icofont-rotate-180"></i> Mon-Sat: 11:00 AM - 23:00 PM
-    </div>
-  </section> -->
+    <!-- ======= Header ======= -->
+    
 
   <!-- ======= Header ======= -->
   <header style="background: black;" id="header" class="fixed-top d-flex align-items-center header-transparent">
@@ -70,26 +68,25 @@ $con = $db->connect();
 
       <div class="logo mr-auto">
         <h1 class="text-light"><a href="index.php"><span>Break-Time</span></a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
       </div>
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-        <li ><a href="index.php">Home</a></li>
+          <li ><a href="index.php">Home</a></li>
           <li><a href="#about">About</a></li>
-          <li class="active"><a href="menu.php">Menu</a></li>
+          <li><a href="menu.php">Menu</a></li>
           <?php
             if($xyz=="admin"){
               echo "
             <li><a href=\"onGoingOrder.php\">On Going Orders</a></li>
-            <li><a href=\"order_history.php\">Order History</a></li>
+            <li class=\"active\"><a href=\"order_history.php\">Order History</a></li>
             <li><a href=\"addFoodItem.php\">Add Food Item</a></li>
           ";
             }
             else{
               echo " <li><a href=\"order.php\">Order Food</a></li>
-              <li><a href=\"order_history.php\">Order History</a></li>
+              <li class=\"active\"><a href=\"order_history.php\">Order History</a></li>
              ";
             }
           ?>
@@ -104,79 +101,100 @@ $con = $db->connect();
           ?>
         </ul>
       </nav><!-- .nav-menu -->
-
     </div>
   </header><!-- End Header -->
-<section id="menu" class="menu">
+
+ 
+
+  <section style="margin-top:15px;" id="why-us\" class="why-us">
       <div class="container">
 
         <div class="section-title">
-          <h2>Check our tasty <span>Menu</span></h2>
-        </div>
+          <h2 style="font-family: Yellowtail script=latin rev=2;">ORDER <span>HISTORY</span></h2>
+           </div>
 
         <div class="row">
-          <div class="col-lg-12 d-flex justify-content-center">
-            <ul id="menu-flters">
-
-              <li data-filter="*" class="filter-active">SHOW ALL</li>
-              <?php
-                $sql="select distinct type from menu";
-                $result= mysqli_query($con,$sql);
-                $result= mysqli_query($con,$sql);
-                while($row=mysqli_fetch_assoc($result)){
-                    $t=$row['type'];
-                    $st=strtoupper($t);
-                    echo "<li data-filter=\".filter-$t \">$st</li>";
+     
+                <?php
+                $uname=$_SESSION['uname'];
+                if($xyz=="admin"){
+                  $sql="SELECT * FROM `order_history`WHERE `status`='COMPLETED';";
                 }
-
-              ?>        
-            </ul>
-          </div>
-        </div>
-
-        <div class="row menu-container">
-          <?php
-           
-            $sql="select * from menu";
-            $result= mysqli_query($con,$sql);
-            while($row=mysqli_fetch_assoc($result)){
-                menuItem($row['item_name'],$row['type'],$row['ingredients'],$row['price'],$row['item_no']);
-
-            }
-          function menuItem($name,$type,$ing,$price,$item_id){
-            echo "<div class=\"col-lg-6 menu-item filter-$type\">
-                <div class=\"menu-content\">
-                <p>$name</p><span>₹$price</span>
-                </div>
-                <div class=\"menu-ingredients\">
-                    $ing
-                </div>
+                else{
+                $sql="SELECT * FROM `order_history` WHERE `username`='$uname';";
+                }
+                $result= mysqli_query($con,$sql);
+                $count = mysqli_num_rows($result);
+                if($count==0){
+                  echo "<div style=\"text-align: center;\">
+                  <h5 style=\"font-family: Verdana, Geneva, Tahoma, sans-serif;\">Please Try Our Tasty Food</h5>
                 
-                </div>";
-            }
-          ?>
-         
+                  <br>       
+                  </div>
+              
+                </div> ";
+                }
+              while($row=mysqli_fetch_assoc($result)){
+                  template($row['order_id'],$row['total_price'],$row['order_detail'],$row['date'],$row['status']);
+
+              }
+            
+            
+              
+              function template($order_id,$total_amt,$ing,$date,$status){
+                echo "
+                <div class=\"col-lg-4 mt-4 mt-lg-0\">
+                    <div class=\"box\">
+                      <h2 style=\"font-family: Verdana, Geneva, Tahoma, sans-serif;\"><span>ORDER ID:</span> $order_id</h2>
+                      <span>ITEMS</span>
+                      <strong><p style=\"color:#000;\"> $ing</p></strong>
+                      <h4 style=\"font-family: Verdana, Geneva, Tahoma, sans-serif;\">TOTAL AMOUNT:  </h4>
+                      <span style=\"font-size: large; color:#000;\">Rs $total_amt</span>
+                      
+                      <strong><p style=\"color:#000;\">ORDERED ON: $date</p></strong>
+                      <span style=\"font-size:20px;\">Order Status </span>
+                      <span style=\"color:#540ADC; font-size:15px;\">$status</span>
+                    </div>
+                </div>
+              ";
+                /*  echo "  <div id = \"leftbox\"> 
+        
+       <div>
+            <h5 style=\"font-family: Verdana, Geneva, Tahoma, sans-serif;\">ORDER NUMBER</h5>
+            <span style=\"font-size: large;\">$order_id</span>
+            <br>
+            <h5 style=\"font-family: Verdana, Geneva, Tahoma, sans-serif;\">TOTAL AMOUNT</h5>
+            <span style=\"font-size: large;\">Rs $total_amt</span>
+            <br>
+            <h5 style=\"font-family: Verdana, Geneva, Tahoma, sans-serif;\">ITEMS</h5>
+            <span style=\font-size: large;\">$ing</span>
+            <br>
+            <h5 style=\"font-family: Verdana, Geneva, Tahoma, sans-serif;\">ORDERED ON</h5>
+            <span style=\"font-size: large;\">$date</span>
+            <br>
+            <h5 style=\"font-family: Verdana, Geneva, Tahoma, sans-serif;\">ORDERED STATUS</h5>
+            <span style=\"font-size: large;\">$status</span>
+            <br>
         </div>
-    </section>
-
-     <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="container">
-      <h3>Break-Time</h3>
-      <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
-      <div class="social-links">
-        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        
+    </div> ";*/
+      }
+      
+      ?>    
       </div>
-      <div class="copyright">
-        &copy; Copyright <strong><span>BreakTime</span></strong>. All Rights Reserved
-      </div>
+   
+</div>
+</section>
 
-    </div>
-  </footer><!-- End Footer -->
+<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+<br>
+                  
+      <script type="text/javascript">
+          setTimeout(function(){
+          location.reload();
+      },60000);
+      </script>
+
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
@@ -189,10 +207,9 @@ $con = $db->connect();
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/venobox/venobox.min.js"></script>
   <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-<script src="assets/js/plusminus.js"></script>
+
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
 </body>
-
 </html>

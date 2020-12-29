@@ -4,9 +4,8 @@
     $con = $db->connect();
     session_start();
     extract($_POST);
-    $uname=$_SESSION['uname'];
-
-    $stmt = $con->prepare("INSERT INTO `order_history` (`username`, `order_detail`,`total_price`) VALUES ('$uname', '$detail','$totalPrice');");
+    
+    $stmt = $con->prepare("UPDATE `order_history` SET `status` = '$status' WHERE `order_history`.`order_id` = '$id';");
 	if($stmt->execute()){
      return 1;
 	    }else{
