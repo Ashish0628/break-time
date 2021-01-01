@@ -78,7 +78,7 @@ if(isset($_SESSION['uname']))
           <li class="active"><a href="index.php">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="menu.php">Menu</a></li>
-          <li><a href="#contact">Contact</a></li>
+     
 
           <?php
             if($xyz=="admin"){
@@ -94,6 +94,8 @@ if(isset($_SESSION['uname']))
              ";
             }
           ?>
+  
+     
 
           <li class="book-a-table text-center"><a href="login.php"><?php echo $xyz?></a></li>
           <?php

@@ -117,11 +117,9 @@ $con = $db->connect();
                 <?php
                 $uname=$_SESSION['uname'];
                 if($xyz=="admin"){
-                  $sql="SELECT * FROM `order_history`WHERE `status`='PENDING' or `status`='BEING PREPARED' or `status`='READY' ;";
+                  $sql="SELECT * FROM `order_history`WHERE `status`='PENDING' or `status`='BEING PREPARED' or `status`='READY' ORDER BY `date` ASC ;";
                 }
-                else{
-                $sql="SELECT * FROM `order_history` WHERE `username`='$uname';";
-                }
+                
                 $result= mysqli_query($con,$sql);
                 $count = mysqli_num_rows($result);
                 if($count==0){

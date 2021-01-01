@@ -130,7 +130,20 @@ $con = $db->connect();
         </div>
         <div class="form-row">
           <label for="type">Dish Type</label>
-          <input type="text" placeholder="Dish Type" name="type" id="type" />
+          <select name="type" id="type" >
+            <?php
+               $db = new DbConnect();
+               $con = $db->connect();
+              $sql="select distinct type from menu";
+              $result= mysqli_query($con,$sql);
+              while($row=mysqli_fetch_assoc($result)){
+                $tmp=$row['type'];
+                $disp=ucfirst($tmp);
+                 echo "<option value=\"$tmp \">$disp</option>";
+              }
+            ?>
+            
+          </select>
           <i class="fas fa-check-circle"></i>
           <i class="fas fa-exclamation-circle"></i>
           <small>Error message</small>  
